@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The RR Men's Collection | Premium Apparel</title>
+  <meta name="description"
+    content="Discover premium, sustainable, and modern clothing at The RR Men's Collection. Order directly via WhatsApp. Fast and lightweight online catalog.">
+
+  <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- Demo Mode Banner -->
+  <div id="demo-banner" class="demo-banner hidden">
+    <span>💡 Running in <strong>Demo Mode</strong>. Database matches are local. Admin login: <code>admin@demo.com</code>
+      / <code>password</code></span>
+    <button id="close-demo-banner" class="close-banner-btn">&times;</button>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="nav-container container">
+      <a href="index.html" class="nav-logo" id="store-title-nav">The RR Men's Collection</a>
+
+      <div class="search-bar-container">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="search-input" placeholder="Search clothes...">
+      </div>
+
+      <nav class="nav-links">
+        <a href="#shop" class="nav-link active">Shop</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <a href="admin.html" class="nav-link"><i class="fa-solid fa-user-gear"></i> Admin</a>
+        <button id="cart-toggle-btn" class="cart-btn" aria-label="Open cart">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content container">
+      <h1 class="hero-title animate-fade-in">Let's Get Dressed</h1>
+      <p class="hero-tagline animate-fade-in-delayed">Minimalist design meets premium comfort. Explore our lightweight
+        summer/fall collection tailored for modern living.</p>
+      <a href="#shop" class="btn-primary animate-fade-in-delayed">Shop Collection <i
+          class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </section>
+
+  <!-- Shop Section -->
+  <main id="shop" class="shop-section container">
+    <div class="shop-header">
+      <div class="section-title-wrap">
+        <span class="sub-title">Catalog</span>
+        <h2 class="section-title">Explore Clothes</h2>
+      </div>
+
+      <!-- Category & Size Filters -->
+      <div class="filters-container">
+        <div class="category-filters" id="category-filters-container">
+          <!-- Categories will be rendered dynamically -->
+        </div>
+
+        <div class="size-filter-wrap">
+          <label for="size-filter-select">Size:</label>
+          <select id="size-filter-select" class="filter-select">
+            <option value="All">All Sizes</option>
+            <!-- Sizes will be added dynamically -->
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Grid -->
+    <div class="product-grid" id="product-grid">
+      <!-- Loading Spinner / Cards will be rendered dynamically -->
+      <div class="spinner-container">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Shopping Cart Drawer (Off-Canvas) -->
+  <div id="cart-drawer" class="cart-drawer-overlay">
+    <div class="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3>Shopping Bag (<span id="cart-drawer-count">0</span>)</h3>
+        <button id="cart-close-btn" class="close-btn" aria-label="Close cart">&times;</button>
+      </div>
+
+      <div class="cart-items-container" id="cart-items-container">
+        <!-- Cart Items rendered dynamically -->
+      </div>
+
+      <div class="cart-drawer-footer">
+        <!-- Delivery Location & Distance Widget -->
+        <div class="delivery-calc-section" id="delivery-calc-section">
+          <button id="get-location-btn" class="btn-calc-delivery">
+            <i class="fa-solid fa-location-crosshairs"></i> Pin Delivery Location & Calculate Charge
+          </button>
+
+          <div id="location-details-container" class="location-details hidden">
+            <div class="location-detail-row">
+              <span class="location-status"><i class="fa-solid fa-circle-check"></i> Location Pinned</span>
+              <button id="reset-location-btn" class="btn-icon-reset" title="Recalculate Distance"><i
+                  class="fa-solid fa-arrows-rotate"></i></button>
+            </div>
+            <div class="location-stats">
+              <span>Distance to Shop: <strong id="delivery-distance">--</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cart-summary">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span id="cart-subtotal">₹0.00</span>
+          </div>
+
+          <div class="summary-row" id="delivery-row">
+            <span>Delivery Charge</span>
+            <span id="cart-delivery">--</span>
+          </div>
+
+          <div class="summary-row total-row">
+            <span>Total Amount</span>
+            <span id="cart-total">₹0.00</span>
+          </div>
+
+          <p class="shipping-info" id="delivery-info-text">Orders above ₹1,500.00 qualify for free delivery!</p>
+        </div>
+
+        <button id="whatsapp-checkout-btn" class="btn-checkout">
+          <i class="fa-brands fa-whatsapp"></i> Order via WhatsApp
+        </button>
+
+        <button id="clear-cart-btn" class="btn-clear-cart">
+          <i class="fa-solid fa-trash-can"></i> Clear Cart
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Quick View Modal -->
+  <div id="product-modal" class="modal-overlay">
+    <div class="modal-content">
+      <button id="modal-close-btn" class="modal-close-btn" aria-label="Close modal">&times;</button>
+
+      <div class="modal-body" id="modal-body-content">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <div class="container contact-grid">
+      <div class="contact-info">
+        <span class="sub-title">Connect</span>
+        <h2 class="section-title">Visit or Contact Us</h2>
+        <p class="contact-desc">Have questions about sizes, materials, or order details? Reach out directly or visit our
+          shop.</p>
+
+        <div class="contact-details-list">
+          <div class="contact-item-row">
+            <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <div>
+              <h4>Our Location</h4>
+              <p id="contact-address">Near East Point Hospital, Bidrahalli Main Road, Bangalore - 560049</p>
+            </div>
+          </div>
+
+          <div class="contact-item-row">
+            <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+            <div>
+              <h4>Phone & WhatsApp</h4>
+              <p id="contact-phone">+91 12345 67890</p>
+            </div>
+          </div>
+
+          <div class="contact-item-row">
+            <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+            <div>
+              <h4>Email Address</h4>
+              <p id="contact-email">contact@therrmenscollection.com</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-hours-card">
+        <h3>Shop Opening Hours</h3>
+        <ul class="hours-list" id="contact-hours-list">
+          <!-- Populated dynamically -->
+        </ul>
+        <div class="delivery-badge-note">
+          <i class="fa-solid fa-truck-fast"></i>
+          <span>Delivery charges are computed dynamically from our shop's location.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container container">
+      <div class="footer-brand">
+        <h3 id="store-title-footer">The RR Men's Collection</h3>
+        <p>Premium lightweight apparel built for durability, comfort, and seamless style.</p>
+      </div>
+      <div class="footer-links">
+        <a href="#shop">Shop</a>
+        <a href="admin.html">Admin Dashboard</a>
+        <span class="footer-tag">Powered by Supabase & WhatsApp</span>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 <span id="store-title-copy">The RR Men's Collection</span>. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Supabase Library (via official CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- Configuration Script -->
+  <script src="supabase-config.js"></script>
+
+  <!-- Storefront Logic -->
+  <script src="app.js"></script>
+</body>
+
+</html>

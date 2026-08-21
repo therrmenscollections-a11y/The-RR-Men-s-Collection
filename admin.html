@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | The RR Men's Collection</title>
+  
+  <!-- Google Fonts: Outfit (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- App Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Demo Mode Banner -->
+  <div id="demo-banner" class="demo-banner hidden">
+    <span>💡 Running in <strong>Demo Mode</strong>. Changes are local. Login with email: <code>admin@demo.com</code> & password: <code>password</code></span>
+    <button id="close-demo-banner" class="close-banner-btn">&times;</button>
+  </div>
+
+  <!-- Admin Navigation -->
+  <header class="navbar">
+    <div class="nav-container container">
+      <div class="admin-logo-text" id="admin-store-title">
+        The RR Men's Collection <span>Admin Portal</span>
+      </div>
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link"><i class="fa-solid fa-store"></i> View Store</a>
+        <button id="logout-btn" class="btn-logout hidden"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container admin-layout">
+    
+    <!-- 1. Secure Login View -->
+    <div id="login-view" class="login-container">
+      <div class="login-card">
+        <h2 class="login-title">Owner Sign In</h2>
+        <p class="login-subtitle">Enter credentials to manage your store catalog.</p>
+        
+        <form id="login-form">
+          <div class="form-group">
+            <label for="login-email">Email Address</label>
+            <input type="email" id="login-email" class="form-input" placeholder="admin@store.com" required autocomplete="email">
+          </div>
+          
+          <div class="form-group">
+            <label for="login-password">Password</label>
+            <input type="password" id="login-password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+          
+          <button type="submit" class="btn-submit" id="btn-login-submit">
+            <i class="fa-solid fa-lock"></i> Sign In
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- 2. Authenticated Admin Dashboard View -->
+    <div id="dashboard-view" class="dashboard-grid hidden">
+      
+      <!-- Left Side: Add Product & Store Settings Forms -->
+      <div style="display: flex; flex-direction: column; gap: 40px;">
+        
+        <!-- Add Product Form -->
+        <section class="admin-card">
+          <h3 class="admin-card-title"><i class="fa-solid fa-circle-plus"></i> Add New Clothes</h3>
+          
+          <form id="product-form">
+            <div class="form-group">
+              <label for="product-name">Clothes Name</label>
+              <input type="text" id="product-name" class="form-input" placeholder="e.g., Linen Summer Shirt" required>
+            </div>
+
+            <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div>
+                <label for="product-price">Price</label>
+                <input type="number" id="product-price" class="form-input" placeholder="29.99" step="0.01" min="0" required>
+              </div>
+              <div>
+                <label for="product-category">Category</label>
+                <select id="product-category" class="form-input" required>
+                  <!-- Categories populated from config -->
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Available Sizes</label>
+              <div class="checkbox-grid" id="sizes-checkbox-container">
+                <!-- Sizes populated from config -->
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="product-description">Description & Details</label>
+              <textarea id="product-description" class="form-input" placeholder="Detail fabric material, fit, washing instructions..." rows="4" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label>Product Image</label>
+              <div class="file-upload-dropzone" id="dropzone">
+                <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                <p class="upload-text">Drag & drop photo or <strong>browse files</strong></p>
+                <input type="file" id="product-image" accept="image/*" required>
+              </div>
+              
+              <!-- Image Preview -->
+              <img id="image-preview" class="image-preview" alt="Upload preview">
+              
+              <!-- Upload Progress -->
+              <div id="progress-container" class="progress-bar-container">
+                <div id="progress-bar" class="progress-bar-fill"></div>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btn-product-submit" style="margin-top: 15px;">
+              <i class="fa-solid fa-cloud-arrow-up"></i> Upload & Add Clothes
+            </button>
+          </form>
+        </section>
+
+        <!-- Store Settings Form Card -->
+        <section class="admin-card">
+          <h3 class="admin-card-title"><i class="fa-solid fa-gears"></i> Store Configurations</h3>
+          
+          <form id="settings-form">
+            <div class="form-group" style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 15px;">
+              <div>
+                <label for="settings-name">Store Name</label>
+                <input type="text" id="settings-name" class="form-input" required>
+              </div>
+              <div>
+                <label for="settings-whatsapp">WhatsApp (Orders)</label>
+                <input type="text" id="settings-whatsapp" class="form-input" placeholder="e.g. 919876543210" required>
+              </div>
+            </div>
+
+            <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div>
+                <label for="settings-email">Contact Email</label>
+                <input type="email" id="settings-email" class="form-input" required>
+              </div>
+              <div>
+                <label for="settings-phone">Contact Phone</label>
+                <input type="text" id="settings-phone" class="form-input" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="settings-address">Shop Address</label>
+              <input type="text" id="settings-address" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label for="settings-hours">Shop Hours</label>
+              <input type="text" id="settings-hours" class="form-input" placeholder="e.g. 9:30 AM - 9:30 PM (Daily)" required>
+            </div>
+
+            <!-- Delivery Configs -->
+            <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div>
+                <label for="settings-base-delivery">Base Delivery Fee (₹)</label>
+                <input type="number" id="settings-base-delivery" class="form-input" min="0" step="0.01" required>
+              </div>
+              <div>
+                <label for="settings-base-km">Base Limit (km)</label>
+                <input type="number" id="settings-base-km" class="form-input" min="0" step="0.1" required>
+              </div>
+            </div>
+
+            <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div>
+                <label for="settings-per-km">Per Extra km (₹)</label>
+                <input type="number" id="settings-per-km" class="form-input" min="0" step="0.01" required>
+              </div>
+              <div>
+                <label for="settings-free-min">Free Delivery Min (₹)</label>
+                <input type="number" id="settings-free-min" class="form-input" min="0" step="0.01" required>
+              </div>
+            </div>
+
+            <!-- Coordinates -->
+            <div class="form-group" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div>
+                <label for="settings-lat">Shop Latitude</label>
+                <input type="number" id="settings-lat" class="form-input" step="0.000001" required>
+              </div>
+              <div>
+                <label for="settings-lng">Shop Longitude</label>
+                <input type="number" id="settings-lng" class="form-input" step="0.000001" required>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="btn-settings-submit" style="margin-top: 15px;">
+              <i class="fa-solid fa-floppy-disk"></i> Save Configurations
+            </button>
+          </form>
+        </section>
+
+      </div>
+
+      <!-- Right Side: Product Inventory List -->
+      <section class="admin-card">
+        <h3 class="admin-card-title"><i class="fa-solid fa-list-check"></i> Inventory List (<span id="inventory-count">0</span>)</h3>
+        
+        <div class="products-table-container">
+          <table class="products-table">
+            <thead>
+              <tr>
+                <th>Product Details</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="inventory-table-body">
+              <!-- Dynamic inventory rows -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Toast Notification System -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container container">
+      <div class="footer-brand">
+        <h3 id="admin-footer-store-title">The RR Men's Collection</h3>
+        <p>Admin Operations Console. Lightweight management dashboard.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">View Storefront</a>
+        <span class="footer-tag">Authorized Access Only</span>
+      </div>
+    </div>
+    <div class="footer-bottom container">
+      <p>&copy; 2026 <span id="admin-copy-store-title">The RR Men's Collection</span> Admin Operations.</p>
+    </div>
+  </footer>
+
+  <!-- Supabase Library (via official CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Configuration Script -->
+  <script src="supabase-config.js"></script>
+  
+  <!-- Admin Board Logic -->
+  <script src="admin.js"></script>
+</body>
+</html>

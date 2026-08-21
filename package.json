@@ -1,0 +1,19 @@
+{
+  "name": "lightweight-whatsapp-ecommerce",
+  "version": "1.0.0",
+  "description": "Lightweight, serverless e-commerce storefront & admin panel with WhatsApp checkout",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx -y serve .",
+    "start": "npx -y serve ."
+  },
+  "keywords": [
+    "ecommerce",
+    "lightweight",
+    "whatsapp",
+    "supabase",
+    "vanilla-js"
+  ],
+  "author": "",
+  "license": "MIT"
+}
